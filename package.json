@@ -1,0 +1,45 @@
+{
+  "name": "gidy-profile-project-api-service",
+  "version": "1.0.0",
+  "description": "Backend API service for the Gidy Profile Project built with Node.js, Express, Prisma ORM, and PostgreSQL.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node src/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dante-eraa/gidy-profile-project-api-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dante-eraa/gidy-profile-project-api-service/issues"
+  },
+  "homepage": "https://github.com/Dante-eraa/gidy-profile-project-api-service#readme",
+  "dependencies": {
+    "@prisma/client": "^5.22.0",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.9.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "prisma": "^5.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
