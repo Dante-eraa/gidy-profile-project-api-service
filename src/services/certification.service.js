@@ -27,6 +27,13 @@ export const createCertificationService = async (userId, body) => {
   });
 };
 
+export const getCertificationsByProfileIdService = async (profileId) => {
+  return prisma.certification.findMany({
+    where: { profileId },
+    orderBy: { issueDate: "desc" },
+  });
+};
+
 export const getCertificationsService = async (userId) => {
   const profile = await prisma.profile.findUnique({
     where: { userId },

@@ -5,6 +5,7 @@ import {
   getExperiencesService,
   updateExperienceService,
   deleteExperienceService,
+  getExperiencesByProfileIdService,
 } from "../services/experience.service.js";
 
 export const createExperience = asyncHandler(async (req, res) => {
@@ -13,6 +14,15 @@ export const createExperience = asyncHandler(async (req, res) => {
   return successResponse(res, {
     statusCode: 201,
     message: "Experience added successfully",
+    data: result,
+  });
+});
+
+export const getPublicExperiences = asyncHandler(async (req, res) => {
+  const result = await getExperiencesByProfileIdService(req.params.profileId);
+
+  return successResponse(res, {
+    message: "Public experiences fetched successfully",
     data: result,
   });
 });

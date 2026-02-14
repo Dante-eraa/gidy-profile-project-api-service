@@ -3,6 +3,7 @@ import CustomError from "../utils/customErrors.js";
 import {
   findCareerVision,
   createCareerVision,
+  updateCareerVision,
 } from "../repository/careerVision.repository.js";
 
 export const createCareerVisionService = async (userId, body) => {
@@ -39,4 +40,21 @@ export const getCareerVisionService = async (userId) => {
   }
 
   return result;
+};
+export const updateCareerVisionService = async (userId, body) => {
+  const profile = await prisma.profile.findUnique({
+    where: { userId },
+  });
+
+  if (!profile) {
+    throw CustomError.notFound("Profile not found");
+  }
+
+  const existing = await findCareerVision(profile.id);
+
+  if (!existing) {
+    throw CustomError.notFound("Career vision not found");
+  }
+
+  return updateCareerVision(profile.id, body);
 };

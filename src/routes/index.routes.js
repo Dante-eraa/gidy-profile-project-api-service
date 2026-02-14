@@ -6,6 +6,7 @@ import experienceRoutes from "./experience.routes.js";
 import educationRoutes from "./education.routes.js";
 import certificateRoutes from "./certification.routes.js";
 import skillRoutes from "./skill.routes.js";
+import socialLinkRoutes from "./socialLink.routes.js";
 
 const router = Router();
 router.use("/api/auth", authRoutes);
@@ -15,5 +16,6 @@ router.use("/api/experience", experienceRoutes);
 router.use("/api/education", educationRoutes);
 router.use("/api/certificate", certificateRoutes);
 router.use("/api/skill", skillRoutes);
+router.use("/api/sociallinks", socialLinkRoutes);
 
 export default router;

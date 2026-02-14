@@ -14,3 +14,9 @@ export const createCareerVision = (profileId, data) => {
     },
   });
 };
+export const updateCareerVision = (profileId, data) => {
+  return prisma.careerVision.update({
+    where: { profileId },
+    data,
+  });
+};

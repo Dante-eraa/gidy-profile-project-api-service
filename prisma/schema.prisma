@@ -63,6 +63,7 @@ model User {
 model Profile {
   id              String          @id @default(uuid())
   userId          String          @unique
+  slug            String          @unique  
   fullName        String          
   firstName       String  
   lastName        String  
@@ -134,8 +135,10 @@ model Education {
   field       String?
   institution String
   location    String
-  startYear   Int
-  endYear     Int?
+  startYear   DateTime
+  endYear     DateTime?
+  isCurrentlyStudying Boolean @default(false)
+
   grade       String?
 
   profileId   String
@@ -146,6 +149,7 @@ model Education {
 
   @@index([profileId])
 }
+
 
 // CERTIFICATION SECTION
 model Certification {

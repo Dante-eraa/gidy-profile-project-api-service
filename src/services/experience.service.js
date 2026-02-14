@@ -28,6 +28,13 @@ export const createExperienceService = async (userId, body) => {
   });
 };
 
+export const getExperiencesByProfileIdService = async (profileId) => {
+  return prisma.experience.findMany({
+    where: { profileId },
+    orderBy: { startDate: "desc" },
+  });
+};
+
 export const getExperiencesService = async (userId) => {
   const profile = await prisma.profile.findUnique({
     where: { userId },

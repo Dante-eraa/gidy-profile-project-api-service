@@ -6,6 +6,7 @@ import {
   getEducations,
   updateEducation,
   deleteEducation,
+  getPublicEducations,
 } from "../controllers/education.controller.js";
 import {
   createEducationSchema,
@@ -15,6 +16,7 @@ import {
 const router = express.Router();
 
 router.get("/", authenticate, getEducations);
+router.get("/public/:profileId", getPublicEducations);
 
 router.post(
   "/",
