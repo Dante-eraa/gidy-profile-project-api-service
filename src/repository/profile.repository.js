@@ -37,3 +37,15 @@ export const findProfileBySlug = (slug) => {
     },
   });
 };
+
+export const findProfileWithDetailsByUserId = (userId) => {
+  return prisma.profile.findUnique({
+    where: { userId },
+    include: {
+      skills: true,
+      experiences: true,
+      educations: true,
+      careerVision: true,
+    },
+  });
+};

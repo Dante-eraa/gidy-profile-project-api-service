@@ -7,6 +7,7 @@ import educationRoutes from "./education.routes.js";
 import certificateRoutes from "./certification.routes.js";
 import skillRoutes from "./skill.routes.js";
 import socialLinkRoutes from "./socialLink.routes.js";
+import aiRoutes from "./ai.routes.js";
 
 const router = Router();
 router.use("/api/auth", authRoutes);
@@ -17,5 +18,6 @@ router.use("/api/education", educationRoutes);
 router.use("/api/certificate", certificateRoutes);
 router.use("/api/skill", skillRoutes);
 router.use("/api/sociallinks", socialLinkRoutes);
+router.use("/api/ai", aiRoutes);
 
 export default router;
