@@ -1,0 +1,226 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+// ENUMS
+
+enum RoleTag {
+  FRESHER
+  STUDENT
+  GRADUATE
+  PROFESSIONAL
+}
+
+enum ThemeMode {
+  LIGHT
+  DARK
+}
+
+enum SocialPlatform {
+  LINKEDIN
+  GITHUB
+  TWITTER
+  PORTFOLIO
+  OTHER
+}
+
+enum EmploymentType {
+  FULL_TIME
+  PART_TIME
+  CONTRACT
+  INTERNSHIP
+  FREELANCE
+}
+
+enum LocationType {
+  ONSITE
+  REMOTE
+  H
+}
+
+
+// USER
+model User {
+  id            String      @id @default(uuid())
+  email         String      @unique
+  password      String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  isActive      Boolean     @default(true)
+
+  profile       Profile?
+  endorsements  Endorsement[]
+  themeSetting  ThemeSetting?
+
+  @@index([email])
+}
+
+// PROFILE
+model Profile {
+  id              String          @id @default(uuid())
+  userId          String          @unique
+  slug            String          @unique  
+  fullName        String          
+  firstName       String  
+  lastName        String  
+  headline        String?
+  location        String?
+  role            RoleTag         @default(STUDENT)
+  bio             String?
+  profileImage    String?
+  resumeUrl       String?
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  user            User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  careerVision    CareerVision?
+  experiences     Experience[]
+  educations      Education[]
+  certifications  Certification[]
+  skills          Skill[]
+  socialLinks     SocialLink[]
+}
+
+// CAREER VISION 
+model CareerVision {
+  id           String   @id @default(uuid())
+  profileId    String   @unique
+
+  careerGoal   String   // Founder & CEO
+  growingInto  String   // Entry Level Professional
+  growthSpace  String   // Cloud & Infrastructure
+  inspiredBy   String   // Hideo Kojima
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  profile      Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+
+// EXPERIENCE SECTION
+model Experience {
+  id            String   @id @default(uuid())
+  title         String
+  employmentType EmploymentType?
+  company       String
+  location      String?
+  locationType  LocationType?
+  description   String?
+  startDate     DateTime
+  endDate       DateTime?
+  isCurrentlyWorking Boolean @default(false)
+
+  profileId     String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  profile       Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+  @@index([company])
+}
+
+
+// EDUCATION SECTION
+model Education {
+  id          String   @id @default(uuid())
+  degree      String
+  field       String?
+  institution String
+  location    String
+  startYear   DateTime
+  endYear     DateTime?
+  isCurrentlyStudying Boolean @default(false)
+
+  grade       String?
+
+  profileId   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  profile     Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+
+// CERTIFICATION SECTION
+model Certification {
+  id              String   @id @default(uuid())
+  title           String
+  issuer          String
+  issueDate       DateTime
+  expiryDate      DateTime?
+  certificateUrl  String?
+
+  profileId       String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  profile         Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+// SKILLS SECTION
+model Skill {
+  id           String        @id @default(uuid())
+  name         String
+  profileId    String
+
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  profile      Profile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  endorsements Endorsement[]
+
+  @@unique([name, profileId])
+  @@index([profileId])
+}
+
+// SKILL ENDORSEMENT 
+model Endorsement {
+  id        String   @id @default(uuid())
+  userId    String
+  skillId   String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId])
+  @@index([skillId])
+  @@index([userId])
+
+}
+
+
+// SOCIAL LINKS
+model SocialLink {
+  id        String   @id @default(uuid())
+  platform  SocialPlatform
+  url       String
+
+  profileId String
+  createdAt DateTime @default(now())
+
+  profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@index([profileId])
+}
+
+// THEME SETTINGS 
+model ThemeSetting {
+  id        String    @id @default(uuid())
+  userId    String    @unique
+  theme     ThemeMode @default(LIGHT)
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
