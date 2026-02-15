@@ -5,6 +5,7 @@ import {
   getEducationsService,
   updateEducationService,
   deleteEducationService,
+  getEducationsByProfileIdService,
 } from "../services/education.service.js";
 
 export const createEducation = asyncHandler(async (req, res) => {
@@ -13,6 +14,14 @@ export const createEducation = asyncHandler(async (req, res) => {
   return successResponse(res, {
     statusCode: 201,
     message: "Education added successfully",
+    data: result,
+  });
+});
+export const getPublicEducations = asyncHandler(async (req, res) => {
+  const result = await getEducationsByProfileIdService(req.params.profileId);
+
+  return successResponse(res, {
+    message: "Public educations fetched successfully",
     data: result,
   });
 });

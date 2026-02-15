@@ -3,6 +3,7 @@ import { successResponse } from "../utils/apiResponse.js";
 import {
   getCareerVisionService,
   createCareerVisionService,
+  updateCareerVisionService,
 } from "../services/careerVision.service.js";
 
 export const createCareerVision = asyncHandler(async (req, res) => {
@@ -20,6 +21,14 @@ export const getCareerVision = asyncHandler(async (req, res) => {
 
   return successResponse(res, {
     message: "Career vision fetched successfully",
+    data: result,
+  });
+});
+export const updateCareerVision = asyncHandler(async (req, res) => {
+  const result = await updateCareerVisionService(req.user.id, req.body);
+
+  return successResponse(res, {
+    message: "Career vision updated successfully",
     data: result,
   });
 });

@@ -5,6 +5,7 @@ import {
   getCertificationsService,
   updateCertificationService,
   deleteCertificationService,
+  getCertificationsByProfileIdService,
 } from "../services/certification.service.js";
 
 export const createCertification = asyncHandler(async (req, res) => {
@@ -13,6 +14,16 @@ export const createCertification = asyncHandler(async (req, res) => {
   return successResponse(res, {
     statusCode: 201,
     message: "Certification added successfully",
+    data: result,
+  });
+});
+export const getPublicCertifications = asyncHandler(async (req, res) => {
+  const result = await getCertificationsByProfileIdService(
+    req.params.profileId,
+  );
+
+  return successResponse(res, {
+    message: "Public certifications fetched successfully",
     data: result,
   });
 });

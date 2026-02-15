@@ -4,8 +4,12 @@ import validate from "../middlewares/validate.middleware.js";
 import {
   createCareerVision,
   getCareerVision,
+  updateCareerVision,
 } from "../controllers/careerVision.controller.js";
-import { careerVisionSchema } from "../validations/careerVision.validation.js";
+import {
+  careerVisionSchema,
+  updateCareerVisionSchema,
+} from "../validations/careerVision.validation.js";
 
 const router = express.Router();
 
@@ -17,4 +21,10 @@ router.post(
   createCareerVision,
 );
 
+router.patch(
+  "/",
+  authenticate,
+  validate(updateCareerVisionSchema),
+  updateCareerVision,
+);
 export default router;

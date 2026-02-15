@@ -6,6 +6,7 @@ import {
   getCertifications,
   updateCertification,
   deleteCertification,
+  getPublicCertifications,
 } from "../controllers/certification.controller.js";
 import {
   createCertificationSchema,
@@ -15,6 +16,8 @@ import {
 const router = express.Router();
 
 router.get("/", authenticate, getCertifications);
+
+router.get("/public/:profileId", getPublicCertifications);
 
 router.post(
   "/",

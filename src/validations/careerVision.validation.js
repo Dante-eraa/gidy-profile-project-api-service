@@ -6,3 +6,9 @@ export const careerVisionSchema = Joi.object({
   growthSpace: Joi.string().required(),
   inspiredBy: Joi.string().required(),
 });
+export const updateCareerVisionSchema = Joi.object({
+  careerGoal: Joi.string().optional(),
+  growingInto: Joi.string().optional(),
+  growthSpace: Joi.string().optional(),
+  inspiredBy: Joi.string().optional(),
+});

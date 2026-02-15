@@ -6,6 +6,7 @@ import {
   getExperiences,
   updateExperience,
   deleteExperience,
+  getPublicExperiences,
 } from "../controllers/experience.controller.js";
 import {
   createExperienceSchema,
@@ -15,7 +16,7 @@ import {
 const router = express.Router();
 
 router.get("/", authenticate, getExperiences);
-
+router.get("/public/:profileId", getPublicExperiences);
 router.post(
   "/",
   authenticate,

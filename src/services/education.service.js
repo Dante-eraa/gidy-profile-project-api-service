@@ -26,6 +26,12 @@ export const createEducationService = async (userId, body) => {
     profileId: profile.id,
   });
 };
+export const getEducationsByProfileIdService = async (profileId) => {
+  return prisma.education.findMany({
+    where: { profileId },
+    orderBy: { startYear: "desc" },
+  });
+};
 
 export const getEducationsService = async (userId) => {
   const profile = await prisma.profile.findUnique({
