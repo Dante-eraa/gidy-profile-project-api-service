@@ -113,7 +113,7 @@ JWT_SECRET="your_jwt_secret"
 CLOUDINARY_CLOUD_NAME="your_cloud_name"
 CLOUDINARY_API_KEY="your_api_key"
 CLOUDINARY_API_SECRET="your_api_secret"
-OPENAI_API_KEY="your_openai_api_key"
+GROQ_API_KEY="your_grok_api_key"
 PORT=5000
 ```
 
