@@ -88,14 +88,18 @@ This reduces friction for users and improves overall profile quality.
 
 ### 1️⃣ Clone the Repository
 
-git clone https://github.com/your-username/gidy-profile-project-api-service.git
+```bash
+git clone https://github.com/Dante-eraa/gidy-profile-project-api-service.git
 cd gidy-profile-project-api-service
+```
 
 ---
 
 ### 2️⃣ Install Dependencies
 
+```bash
 npm install
+```
 
 ---
 
@@ -103,6 +107,7 @@ npm install
 
 Create a `.env` file in the root directory:
 
+```bash
 DATABASE_URL="postgresql://username:password@localhost:5432/gidy_db"
 JWT_SECRET="your_jwt_secret"
 CLOUDINARY_CLOUD_NAME="your_cloud_name"
@@ -110,37 +115,44 @@ CLOUDINARY_API_KEY="your_api_key"
 CLOUDINARY_API_SECRET="your_api_secret"
 OPENAI_API_KEY="your_openai_api_key"
 PORT=5000
+```
 
 ---
 
 ### 4️⃣ Run Prisma Migrations
 
+```bash
 npx prisma migrate dev
 npx prisma generate
+```
 
 ---
 
 ### 5️⃣ Start Development Server
 
+```bash
 npm run dev
+```
 
 Server runs at:
 
+```bash
 http://localhost:5000
+```
 
 ---
 
 ## 📁 Project Structure
 
-src/
-│
-├── controllers/ # Route logic
-├── services/ # Business logic
-├── routes/ # API route definitions
-├── middleware/ # Authentication & error handling
-├── utils/ # Helper utilities
-├── prisma/ # Prisma schema
-└── server.js # Entry point
+├src/
+│ │
+│ ├── controllers/ # Route logic
+│ ├── services/ # Business logic
+│ ├── routes/ # API route definitions
+│ ├── middleware/ # Authentication & error handling
+│ ├── utils/ # Helper utilities
+│ └── server.js # Entry point
+├prisma/ # Prisma schema
 
 ---
 
