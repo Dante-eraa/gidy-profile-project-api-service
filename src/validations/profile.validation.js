@@ -6,6 +6,6 @@ export const updateProfileSchema = Joi.object({
   lastName: Joi.string().optional(),
   headline: Joi.string().optional(),
   location: Joi.string().optional(),
-  bio: Joi.string().optional(),
+  bio: Joi.string().allow("").optional(),
   role: Joi.string().optional(),
 });
